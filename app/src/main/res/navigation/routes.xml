@@ -20,5 +20,13 @@
         <action
             android:id="@+id/action_lockFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_lockFragment_to_membersFragment"
+            app:destination="@id/membersFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/membersFragment"
+        android:name="club.infolab.itmo_lock.ui.members.MembersFragment"
+        android:label="members_fragment"
+        tools:layout="@layout/members_fragment" />
 </navigation>
