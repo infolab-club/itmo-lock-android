@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ITMO.Lock</string>
     <string name="rooms">Аудитории</string>
+    <string name="members">Участники</string>
+    <string name="room_description_sample">Проход в коворкинг и лекционную</string>
+    <string name="open">Открыть</string>
 </resources>

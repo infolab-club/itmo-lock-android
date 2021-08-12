@@ -1,6 +1,7 @@
 package club.infolab.itmo_lock.ui.rooms
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,19 +23,20 @@ class RoomsFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         binding = MainFragmentBinding
             .bind(inflater.inflate(R.layout.main_fragment, container, false))
+        initView()
+        initViewModel()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
-        initView()
     }
 
     private fun initView() {
         roomsRecycler = binding.roomsRecycler
         roomsRecycler.layoutManager = LinearLayoutManager(requireContext())
         roomsAdapter = RoomsAdapter()
+        roomsRecycler.adapter = roomsAdapter
         roomsViewModel.updateData()
     }
 
@@ -49,7 +51,6 @@ class RoomsFragment : Fragment() {
             } else {
                 roomsAdapter.rooms = it
                 roomsViewModel.viewingRooms = it
-                roomsRecycler.adapter = roomsAdapter
             }
         }
     }

@@ -8,5 +8,17 @@
         android:id="@+id/mainFragment"
         android:name="club.infolab.itmo_lock.ui.rooms.RoomsFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_lockFragment"
+            app:destination="@id/lockFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lockFragment"
+        android:name="club.infolab.itmo_lock.ui.lock.LockFragment"
+        android:label="LockFragment" >
+        <action
+            android:id="@+id/action_lockFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

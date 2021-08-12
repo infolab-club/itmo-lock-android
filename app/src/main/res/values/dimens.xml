@@ -4,6 +4,12 @@
     <dimen name="ic_arrow_size">20dp</dimen>
     <dimen name="padding_card_view">16dp</dimen>
     <dimen name="padding_card_view_sides">32dp</dimen>
+    <dimen name="padding_button">10dp</dimen>
     <dimen name="text_size_card">20sp</dimen>
     <dimen name="margin_on_screen">32dp</dimen>
+    <dimen name="room_image_size">250dp</dimen>
+    <dimen name="room_progress_size">320dp</dimen>
+    <dimen name="room_des_size">16sp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
+    <dimen name="padding_des">32dp</dimen>
 </resources>

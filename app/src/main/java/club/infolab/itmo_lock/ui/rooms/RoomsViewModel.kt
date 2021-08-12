@@ -1,5 +1,6 @@
 package club.infolab.itmo_lock.ui.rooms
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import club.infolab.itmo_lock.model.Room
@@ -19,5 +20,10 @@ class RoomsViewModel(val repo: Repository) : ViewModel() {
 
     fun getRoomsData() : ArrayList<Room> {
         return rooms.value!!
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("View model", "On cleared")
     }
 }
