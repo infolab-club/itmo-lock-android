@@ -3,6 +3,7 @@
     package="club.infolab.itmo_lock">
 
     <application
+        android:name=".app.ItmoLockApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

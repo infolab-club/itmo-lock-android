@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">itmo-lock</string>
+    <string name="app_name">ITMO.Lock</string>
+    <string name="rooms">Аудитории</string>
 </resources>

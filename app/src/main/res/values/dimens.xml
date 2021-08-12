@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_view_radius">15dp</dimen>
+    <dimen name="ic_arrow_size">20dp</dimen>
+    <dimen name="padding_card_view">16dp</dimen>
+    <dimen name="padding_card_view_sides">32dp</dimen>
+    <dimen name="text_size_card">20sp</dimen>
+    <dimen name="margin_on_screen">32dp</dimen>
+</resources>
