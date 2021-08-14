@@ -1,15 +1,13 @@
-package club.infolab.itmo_lock.ui.rooms
+package club.infolab.itmo_lock.presentation.ui.rooms
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.databinding.RoomItemBinding
-import club.infolab.itmo_lock.model.Room
+import club.infolab.itmo_lock.data.model.Room
 
 class RoomsAdapter() : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
     var rooms: ArrayList<Room>? = null

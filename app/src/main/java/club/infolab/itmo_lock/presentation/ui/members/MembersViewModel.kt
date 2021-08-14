@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.ui.members
+package club.infolab.itmo_lock.presentation.ui.members
 
 import androidx.lifecycle.ViewModel
 

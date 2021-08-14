@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.ui.members
+package club.infolab.itmo_lock.presentation.ui.members
 
 import android.os.Bundle
 import android.view.LayoutInflater

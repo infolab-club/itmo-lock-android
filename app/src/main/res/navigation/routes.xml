@@ -3,30 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/routes"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="club.infolab.itmo_lock.ui.rooms.RoomsFragment"
+        android:name="club.infolab.itmo_lock.presentation.ui.rooms.RoomsFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" >
         <action
             android:id="@+id/action_mainFragment_to_lockFragment"
-            app:destination="@id/lockFragment" />
+            app:destination="@id/lockFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/lockFragment"
-        android:name="club.infolab.itmo_lock.ui.lock.LockFragment"
-        android:label="LockFragment" >
+        android:name="club.infolab.itmo_lock.presentation.ui.lock.LockFragment"
+        android:label="LockFragment"
+        tools:layout="@layout/lock_fragment" >
         <action
             android:id="@+id/action_lockFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"/>
         <action
             android:id="@+id/action_lockFragment_to_membersFragment"
-            app:destination="@id/membersFragment" />
+            app:destination="@id/membersFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/membersFragment"
-        android:name="club.infolab.itmo_lock.ui.members.MembersFragment"
+        android:name="club.infolab.itmo_lock.presentation.ui.members.MembersFragment"
         android:label="members_fragment"
         tools:layout="@layout/members_fragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="club.infolab.itmo_lock.presentation.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="club.infolab.itmo_lock.presentation.ui.registration.RegistrationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/registration_fragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_registrationFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
 </navigation>

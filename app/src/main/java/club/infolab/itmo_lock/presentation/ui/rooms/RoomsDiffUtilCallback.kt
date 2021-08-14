@@ -1,7 +1,7 @@
-package club.infolab.itmo_lock.ui.rooms
+package club.infolab.itmo_lock.presentation.ui.rooms
 
 import androidx.recyclerview.widget.DiffUtil
-import club.infolab.itmo_lock.model.Room
+import club.infolab.itmo_lock.data.model.Room
 
 class RoomsDiffUtilCallback(
     private val oldList: List<Room>,

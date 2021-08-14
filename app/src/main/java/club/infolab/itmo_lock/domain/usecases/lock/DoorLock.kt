@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.lock
+package club.infolab.itmo_lock.domain.usecases.lock
 
 import android.os.Handler
 import android.os.Looper

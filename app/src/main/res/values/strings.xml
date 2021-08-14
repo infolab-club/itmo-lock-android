@@ -5,4 +5,11 @@
     <string name="room_description_sample">Проход в коворкинг и лекционную</string>
     <string name="open">Открыть</string>
     <string name="error_message">Что-то пошло не так</string>
+    <string name="unlocked">Замок открыт</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
 </resources>

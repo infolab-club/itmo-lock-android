@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.lock
+package club.infolab.itmo_lock.domain.usecases.lock
 
 interface Lock {
     fun unlock(token: List<Char>)

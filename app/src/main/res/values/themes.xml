@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Itmolock" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark_back</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/dark_back</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -11,6 +11,14 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="android:navigationBarColor">@color/dark_view</item>
+
+        <item name="android:colorControlNormal">@color/white</item>
+        <item name="android:colorControlActivated">@color/white</item>
+        <item name="android:colorControlHighlight">@color/white</item>
+        <item name="android:colorAccent">@color/white</item>
+
         <!-- Customize your theme here. -->
     </style>
 </resources>
