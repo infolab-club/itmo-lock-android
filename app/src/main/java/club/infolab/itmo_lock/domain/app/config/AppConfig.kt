@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.config
+package club.infolab.itmo_lock.domain.app.config
 
 import club.infolab.itmo_lock.data.model.Room
 

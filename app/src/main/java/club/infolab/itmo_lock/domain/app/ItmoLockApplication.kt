@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.app
+package club.infolab.itmo_lock.domain.app
 
 import android.app.Application
 import club.infolab.itmo_lock.appModule

@@ -38,7 +38,7 @@
         tools:layout="@layout/members_fragment" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="club.infolab.itmo_lock.presentation.ui.login.LoginFragment"
+        android:name="club.infolab.itmo_lock.presentation.ui.auth.login.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="club.infolab.itmo_lock.presentation.ui.registration.RegistrationFragment"
+        android:name="club.infolab.itmo_lock.presentation.ui.auth.registration.RegistrationFragment"
         android:label="RegistrationFragment"
         tools:layout="@layout/registration_fragment">
         <action

@@ -26,7 +26,6 @@ class MembersFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MembersViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

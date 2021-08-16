@@ -4,12 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import club.infolab.itmo_lock.R
-import club.infolab.itmo_lock.databinding.RoomItemBinding
 import club.infolab.itmo_lock.data.model.Room
+import club.infolab.itmo_lock.databinding.RoomItemBinding
 
-class RoomsAdapter() : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
+class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
     var rooms: ArrayList<Room>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
         return RoomsViewHolder(

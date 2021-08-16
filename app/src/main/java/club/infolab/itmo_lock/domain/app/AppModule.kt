@@ -2,6 +2,8 @@ package club.infolab.itmo_lock
 
 import club.infolab.itmo_lock.data.repository.Repository
 import club.infolab.itmo_lock.data.repository.RepositoryImpl
+import club.infolab.itmo_lock.presentation.ui.auth.login.LoginViewModel
+import club.infolab.itmo_lock.presentation.ui.auth.registration.RegistrationViewModel
 import club.infolab.itmo_lock.presentation.ui.lock.LockViewModel
 import club.infolab.itmo_lock.presentation.ui.rooms.RoomsViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -12,4 +14,6 @@ val appModule = module {
 
     viewModel { LockViewModel() }
     viewModel { RoomsViewModel(get()) }
+    viewModel { LoginViewModel() }
+    viewModel { RegistrationViewModel() }
 }

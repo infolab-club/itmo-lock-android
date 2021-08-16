@@ -4,20 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.login.LoginFragment">
+    tools:context=".presentation.ui.auth.login.LoginFragment">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="@dimen/logo_size"
         android:layout_height="@dimen/logo_size"
         android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/loginContainer"
+        app:layout_constraintBottom_toTopOf="@+id/regContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loadingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/pink"
+        app:layout_constraintBottom_toTopOf="@+id/regContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
     <LinearLayout
-        android:id="@+id/loginContainer"
+        android:id="@+id/regContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/login_back"

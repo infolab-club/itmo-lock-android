@@ -1,14 +1,17 @@
 package club.infolab.itmo_lock.presentation.ui.rooms
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import club.infolab.itmo_lock.R
+import club.infolab.itmo_lock.data.model.KeyObj
 import club.infolab.itmo_lock.databinding.MainFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -29,6 +32,7 @@ class RoomsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.i(TAG, "onViewCreated: ${KeyObj.token}")
     }
 
     private fun initView() {
