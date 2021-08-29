@@ -14,8 +14,17 @@ import club.infolab.itmo_lock.presentation.ui.auth.LoadStatus
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
+
     private val binding by viewBinding(FragmentLoginBinding::bind)
+
     private val authViewModel: AuthViewModel by viewModel()
+
+    private val navController by lazy { findNavController() }
+
+    override fun onStart() {
+        super.onStart()
+        authViewModel.loginLastData()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,9 +57,15 @@ class LoginFragment : Fragment() {
                 binding.emailField.error = status.error.toString()
             }
             is LoadStatus.Success -> {
-                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                navigateToMain()
+            }
+            is LoadStatus.InputWaiting -> {
             }
         }
+    }
+
+    private fun navigateToMain() {
+        navController.navigate(R.id.action_loginFragment_to_mainFragment)
     }
 
     private fun initButtons() {
@@ -59,7 +74,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.regTextButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
+            navController.navigate(R.id.action_loginFragment_to_registrationFragment)
         }
     }
 

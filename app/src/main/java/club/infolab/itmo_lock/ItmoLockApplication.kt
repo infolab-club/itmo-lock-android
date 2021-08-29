@@ -2,6 +2,7 @@ package club.infolab.itmo_lock
 
 import android.app.Application
 import club.infolab.itmo_lock.di.networkModule
+import club.infolab.itmo_lock.di.sharedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -12,7 +13,7 @@ class ItmoLockApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@ItmoLockApplication)
-            modules(listOf(appModule, networkModule))
+            modules(listOf(appModule, networkModule, sharedModule))
         }
     }
 }
