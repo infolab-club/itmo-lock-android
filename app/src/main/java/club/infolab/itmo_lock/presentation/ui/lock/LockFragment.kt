@@ -7,29 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import club.infolab.itmo_lock.R
-import club.infolab.itmo_lock.databinding.LockFragmentBinding
-import club.infolab.itmo_lock.domain.usecases.lock.LockStatus
+import club.infolab.itmo_lock.databinding.FragmentLockBinding
+import club.infolab.itmo_lock.domain.LockStatus
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LockFragment : Fragment() {
     private val lockViewModel: LockViewModel by viewModel()
-//    private lateinit var lockViewModel: LockViewModel
-    private lateinit var binding: LockFragmentBinding
+    private val binding by viewBinding(FragmentLockBinding::bind)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = LockFragmentBinding
-                .bind(inflater.inflate(R.layout.lock_fragment, container, false))
-        return binding.root
+        return inflater.inflate(R.layout.fragment_lock, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        lockViewModel = ViewModelProviders.of(this).get(LockViewModel::class.java)
         initView()
     }
 
@@ -48,7 +45,7 @@ class LockFragment : Fragment() {
     private fun initStatusObserve() {
         lockViewModel.lockedStatus.observe(viewLifecycleOwner) {
             Log.d("FRAGMENT", it.toString())
-            when(it) {
+            when (it) {
                 LockStatus.LOCKED -> viewLocked()
                 LockStatus.WAITING -> viewWaiting()
                 LockStatus.UNLOCKED -> viewUnlocked()
@@ -91,5 +88,4 @@ class LockFragment : Fragment() {
     private fun unlock() {
         lockViewModel.unlock()
     }
-
 }

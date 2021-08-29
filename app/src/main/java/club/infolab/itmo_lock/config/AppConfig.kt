@@ -1,6 +1,6 @@
-package club.infolab.itmo_lock.domain.app.config
+package club.infolab.itmo_lock.config
 
-import club.infolab.itmo_lock.data.model.Room
+import club.infolab.itmo_lock.data.entity.Room
 
 class AppConfig {
     companion object {

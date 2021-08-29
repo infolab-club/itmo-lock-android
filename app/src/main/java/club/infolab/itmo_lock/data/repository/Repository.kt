@@ -1,7 +1,7 @@
 package club.infolab.itmo_lock.data.repository
 
-import club.infolab.itmo_lock.data.model.Room
+import club.infolab.itmo_lock.data.entity.Room
 
 interface Repository {
-    fun getAccessibleRooms() : ArrayList<Room>
+    fun getAccessibleRooms(): List<Room>
 }

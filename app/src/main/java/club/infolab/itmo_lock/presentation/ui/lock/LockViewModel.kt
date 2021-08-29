@@ -3,8 +3,8 @@ package club.infolab.itmo_lock.presentation.ui.lock
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import club.infolab.itmo_lock.domain.usecases.lock.DoorLock
-import club.infolab.itmo_lock.domain.usecases.lock.LockStatus
+import club.infolab.itmo_lock.domain.DoorLock
+import club.infolab.itmo_lock.domain.LockStatus
 
 class LockViewModel : ViewModel() {
     val lockedStatus = MutableLiveData(LockStatus.LOCKED)

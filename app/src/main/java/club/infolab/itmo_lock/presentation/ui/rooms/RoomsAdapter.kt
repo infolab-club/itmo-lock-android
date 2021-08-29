@@ -7,16 +7,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import club.infolab.itmo_lock.R
-import club.infolab.itmo_lock.data.model.Room
-import club.infolab.itmo_lock.databinding.RoomItemBinding
+import club.infolab.itmo_lock.data.entity.Room
+import club.infolab.itmo_lock.databinding.ItemRoomBinding
 
 class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
-    var rooms: ArrayList<Room>? = null
+    var rooms: List<Room>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
         return RoomsViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.room_item,
+                R.layout.item_room,
                 parent,
                 false
             )
@@ -43,5 +43,5 @@ class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
         return rooms?.size ?: 0
     }
 
-    class RoomsViewHolder(val binding: RoomItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class RoomsViewHolder(val binding: ItemRoomBinding) : RecyclerView.ViewHolder(binding.root)
 }

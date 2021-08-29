@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.domain.usecases.lock
+package club.infolab.itmo_lock.domain
 
 import android.os.Handler
 import android.os.Looper
@@ -19,10 +19,6 @@ object DoorLock : Lock {
             status.value = LockStatus.UNLOCKED
             Log.d("LOCK", "UNLOCKED")
         }, 3000)
-//
-//        sleep(10000)
-//        status.value = LockStatus.LOCKED
-//        Log.d("LOCK", "LOCKED")
 
     }
 
