@@ -1,4 +1,4 @@
-package club.infolab.itmo_lock.presentation.ui.rooms
+package club.infolab.itmo_lock.presentation.ui.rooms.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import club.infolab.itmo_lock.data.entity.Room

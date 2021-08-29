@@ -17,7 +17,7 @@ class RoomsViewModel(private val repository: RoomsRepository) : ViewModel() {
         updateData()
     }
 
-    fun updateData() {
+    private fun updateData() {
         repository.getAccessibleRooms()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

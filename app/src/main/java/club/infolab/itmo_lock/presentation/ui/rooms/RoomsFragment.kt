@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.databinding.FragmentMainBinding
+import club.infolab.itmo_lock.presentation.ui.rooms.adapter.RoomsAdapter
+import club.infolab.itmo_lock.presentation.ui.rooms.adapter.RoomsDecoration
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RoomsFragment : Fragment() {
@@ -33,6 +35,7 @@ class RoomsFragment : Fragment() {
         roomsRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = roomsAdapter
+            addItemDecoration(RoomsDecoration())
         }
         roomsViewModel.rooms.observe(viewLifecycleOwner) {
             roomsAdapter.setData(it)

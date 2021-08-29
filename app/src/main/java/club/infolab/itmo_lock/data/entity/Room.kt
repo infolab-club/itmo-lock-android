@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class Room(
+data class Room(
     @SerialName("id")
     var id: Int,
     @SerialName("number")
