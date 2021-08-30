@@ -8,9 +8,8 @@ import club.infolab.itmo_lock.data.entity.KeyObj
 import club.infolab.itmo_lock.data.entity.LoginData
 import club.infolab.itmo_lock.data.entity.RegistrationData
 import club.infolab.itmo_lock.data.repository.AuthRepository
-import com.tinkoffsirius.koshelok.repository.shared.AccountSharedRepository
+import com.tinkoffsirius.koshelok.repository.shared.AccountShared
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.plusAssign
@@ -19,7 +18,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class AuthViewModel(
     private val authRepository: AuthRepository,
-    private val accountShared: AccountSharedRepository
+    private val accountShared: AccountShared
 ) : ViewModel() {
     val loginStatus: MutableLiveData<LoadStatus?> = MutableLiveData()
     private val disposable: CompositeDisposable = CompositeDisposable()
@@ -49,7 +48,6 @@ class AuthViewModel(
             .subscribeBy(
                 onComplete = {
                     loginStatus.postValue(LoadStatus.Success())
-                    saveAccount(data)
                 },
                 onError = { loginStatus.postValue(LoadStatus.Error(it)) }
             )
@@ -57,14 +55,14 @@ class AuthViewModel(
 
     private fun loginRequest(data: LoginData) =
         authRepository.login(data)
-            .flatMapCompletable {
-                KeyObj.token = it.userToken
-                return@flatMapCompletable saveAccount(data)
+            .flatMap { keyObj ->
+                KeyObj.token = keyObj.userToken
+                authRepository.getUserInfo(keyObj.userToken)
             }
-
-    private fun saveAccount(loginData: LoginData): Completable {
-        return accountShared.saveLoginData(loginData)
-    }
+            .flatMapCompletable {
+                accountShared.saveUserInfo(it)
+            }
+            .andThen(accountShared.saveLoginData(data))
 
     private fun getAccount(): Single<LoginData> {
         return accountShared.getLoginData()

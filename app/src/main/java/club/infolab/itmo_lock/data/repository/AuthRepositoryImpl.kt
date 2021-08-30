@@ -2,6 +2,7 @@ package club.infolab.itmo_lock.data.repository
 
 import club.infolab.itmo_lock.data.entity.LoginData
 import club.infolab.itmo_lock.data.entity.RegistrationData
+import club.infolab.itmo_lock.data.entity.UserInfo
 import club.infolab.itmo_lock.data.entity.UserKeyObj
 import club.infolab.itmo_lock.data.network.ItmoLockService
 import io.reactivex.rxjava3.core.Single
@@ -17,5 +18,9 @@ class AuthRepositoryImpl : AuthRepository {
 
     override fun register(registrationData: RegistrationData): Single<UserKeyObj> {
         return itmoLockService.register(data = registrationData)
+    }
+
+    override fun getUserInfo(token: String): Single<UserInfo> {
+        return itmoLockService.getUserInfo(token)
     }
 }

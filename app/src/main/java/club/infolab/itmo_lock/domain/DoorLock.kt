@@ -1,28 +1,41 @@
 package club.infolab.itmo_lock.domain
 
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import club.infolab.itmo_lock.config.AppConfig
+import com.ttlock.bl.sdk.api.TTLockClient
+import com.ttlock.bl.sdk.callback.ControlLockCallback
+import com.ttlock.bl.sdk.constant.ControlAction
+import com.ttlock.bl.sdk.entity.LockError
+import io.reactivex.rxjava3.core.Completable
 
-object DoorLock : Lock {
-    var status = MutableLiveData(LockStatus.LOCKED)
+object DoorLock {
 
-    init {
-        Log.d("LOCK", "LOCKED")
+    fun unlock(
+        tokenLock: String,
+        onSuccess: () -> Unit,
+        onError: (LockError) -> Unit
+    ): Completable =
+        Completable.fromAction {
+            TTLockClient.getDefault().controlLock(
+                ControlAction.UNLOCK,
+                tokenLock,
+                AppConfig.LOCK_MAC,
+                object : ControlLockCallback {
+                    override fun onFail(error: LockError) {
+                        onError(error)
+                    }
+
+                    override fun onControlLockSuccess(
+                        lockAction: Int,
+                        battery: Int,
+                        uniqueId: Int
+                    ) {
+                        onSuccess()
+                    }
+
+                })
     }
 
-    override fun unlock(token: List<Char>) {
-        status.value = LockStatus.WAITING
-        Log.d("LOCK", "WAITING 2sec")
-        Handler(Looper.getMainLooper()).postDelayed( {
-            status.value = LockStatus.UNLOCKED
-            Log.d("LOCK", "UNLOCKED")
-        }, 3000)
-
-    }
-
-    override fun lock(token: List<Char>) {
+    fun lock(token: List<Char>) {
         return
     }
 }

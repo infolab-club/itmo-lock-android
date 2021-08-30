@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.data.entity.Room
-import club.infolab.itmo_lock.databinding.FragmentMainBinding
+import club.infolab.itmo_lock.databinding.FragmentRoomsBinding
 import club.infolab.itmo_lock.presentation.ui.rooms.adapter.RoomsAdapter
 import club.infolab.itmo_lock.presentation.ui.rooms.adapter.RoomsDecoration
 import kotlinx.serialization.encodeToString
@@ -21,7 +21,7 @@ class RoomsFragment : Fragment() {
 
     private val roomsViewModel: RoomsViewModel by viewModel()
 
-    private val binding by viewBinding(FragmentMainBinding::bind)
+    private val binding by viewBinding(FragmentRoomsBinding::bind)
 
     private val navController by lazy { findNavController() }
 
@@ -29,11 +29,16 @@ class RoomsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_rooms, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.appBar.setNavigationOnClickListener {
+            roomsViewModel.logout {
+                navController.navigate(R.id.action_mainFragment_to_loginFragment)
+            }
+        }
         initRecycler()
     }
 

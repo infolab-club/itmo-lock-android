@@ -60,6 +60,7 @@ class LoginFragment : Fragment() {
                 navigateToMain()
             }
             is LoadStatus.InputWaiting -> {
+                binding.loadingBar.visibility = View.GONE
             }
         }
     }

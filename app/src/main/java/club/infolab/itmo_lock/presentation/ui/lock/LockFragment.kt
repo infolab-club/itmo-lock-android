@@ -1,5 +1,6 @@
 package club.infolab.itmo_lock.presentation.ui.lock
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,13 @@ import club.infolab.itmo_lock.databinding.FragmentLockBinding
 import club.infolab.itmo_lock.domain.LockStatus
 import club.infolab.itmo_lock.presentation.ui.rooms.RoomsFragment.Companion.ROOM_ARG
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
+import com.ttlock.bl.sdk.api.TTLockClient
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -37,7 +44,31 @@ class LockFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewWaiting()
         initView()
+    }
+
+    private val requestListener = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            viewError()
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            viewLocked()
+            return false
+        }
     }
 
     private fun initView() {
@@ -56,11 +87,14 @@ class LockFragment : Fragment() {
             Glide
                 .with(root)
                 .load(room.picture)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .listener(requestListener)
                 .into(roomPicture)
 
             roomDescription.text = room.description
 
             buttonOpen.setOnClickListener {
+                ensureBluetoothIsEnabled()
                 lockViewModel.unlock()
             }
         }
@@ -74,6 +108,12 @@ class LockFragment : Fragment() {
                 LockStatus.WAITING -> viewWaiting()
                 LockStatus.UNLOCKED -> viewUnlocked()
                 LockStatus.ERROR -> viewError()
+            }
+        }
+
+        lockViewModel.userInfo.observe(viewLifecycleOwner) { user ->
+            with(binding.toolbar.menu.findItem(R.id.itemMembers)) {
+                isVisible = user.isAdmin
             }
         }
     }
@@ -101,9 +141,6 @@ class LockFragment : Fragment() {
     }
 
     private fun viewLocked() {
-        Snackbar.make(binding.root, getString(R.string.locked), Snackbar.LENGTH_SHORT)
-            .setBackgroundTint(resources.getColor(R.color.dark_view))
-            .setTextColor(resources.getColor(R.color.white)).show()
         binding.progressCircular.apply {
             visibility = View.INVISIBLE
             isIndeterminate = false
@@ -117,6 +154,12 @@ class LockFragment : Fragment() {
             visibility = View.INVISIBLE
             isIndeterminate = true
             visibility = View.VISIBLE
+        }
+    }
+
+    private fun ensureBluetoothIsEnabled() {
+        if (!TTLockClient.getDefault().isBLEEnabled(requireContext())) {
+            TTLockClient.getDefault().requestBleEnable(requireActivity())
         }
     }
 }
