@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ivan/Code/Android/itmolock/app/src/main/res/layout/fragment_lock.xml" value="0.1" />
         <entry key="..\:/Users/Ivan/Code/Android/itmolock/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/Users/Ivan/Code/Android/itmolock/app/src/main/res/layout/fragment_main.xml" value="0.13632246376811594" />
       </map>

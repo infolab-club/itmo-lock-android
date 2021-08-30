@@ -4,14 +4,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.data.entity.Room
 import club.infolab.itmo_lock.databinding.ItemRoomBinding
 
-class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
+class RoomsAdapter(private val onClickCallback: (room: Room) -> Unit) :
+    RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
     private var rooms = AsyncListDiffer(this, RoomsDiffUtils())
 
@@ -34,16 +34,12 @@ class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
         Log.d("BIND", "bind pos $position")
         holder.binding.roomNumber.text = rooms.currentList[position].number
         holder.binding.goToRoom.setOnClickListener {
-            onClickGoToRoom(rooms.currentList[position], holder)
+            onClickCallback(rooms.currentList[position])
         }
 
         holder.binding.root.setOnClickListener {
-            onClickGoToRoom(rooms.currentList[position], holder)
+            onClickCallback(rooms.currentList[position])
         }
-    }
-
-    private fun onClickGoToRoom(room: Room, holder: RoomsViewHolder) {
-        holder.binding.root.findNavController().navigate(R.id.action_mainFragment_to_lockFragment)
     }
 
     override fun getItemCount(): Int {

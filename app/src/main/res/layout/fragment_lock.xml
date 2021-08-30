@@ -17,8 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
+            android:backgroundTint="@color/dark_back"
             app:menu="@menu/lock_menu"
-            app:title="@string/rooms"
+            tools:title="Аудитория"
             app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -44,7 +45,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.25">
 
-
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/roomPicture"
                     android:layout_width="@dimen/room_image_size"
@@ -67,12 +67,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
             <TextView
                 android:id="@+id/roomDescription"
@@ -98,8 +94,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/roomDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.core.widget.NestedScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
