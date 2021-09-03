@@ -12,6 +12,7 @@ import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.data.entity.Room
 import club.infolab.itmo_lock.databinding.FragmentLockBinding
 import club.infolab.itmo_lock.domain.LockStatus
+import club.infolab.itmo_lock.presentation.ui.rooms.RoomsFragment
 import club.infolab.itmo_lock.presentation.ui.rooms.RoomsFragment.Companion.ROOM_ARG
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -22,6 +23,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import com.ttlock.bl.sdk.api.TTLockClient
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -76,9 +78,14 @@ class LockFragment : Fragment() {
             val room = lockViewModel.room!!
 
             toolbar.apply {
-                menu.findItem(R.id.itemMembers).setOnMenuItemClickListener {
-                    navController.popBackStack()
-                    true
+                with(menu.findItem(R.id.itemMembers)) {
+                    isVisible = false
+                    setOnMenuItemClickListener {
+                        val bundle = Bundle()
+                        bundle.putString(RoomsFragment.ROOM_ARG, Json.encodeToString(room))
+                        navController.navigate(R.id.action_lockFragment_to_membersFragment, bundle)
+                        false
+                    }
                 }
 
                 title = "Аудитория ${room.number}"
@@ -93,7 +100,7 @@ class LockFragment : Fragment() {
 
             roomDescription.text = room.description
 
-            buttonOpen.setOnClickListener {
+            buttonUnlock.setOnClickListener {
                 ensureBluetoothIsEnabled()
                 lockViewModel.unlock()
             }

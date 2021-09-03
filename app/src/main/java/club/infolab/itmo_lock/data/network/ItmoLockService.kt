@@ -1,6 +1,7 @@
 package club.infolab.itmo_lock.data.network
 
 import club.infolab.itmo_lock.data.entity.*
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
@@ -28,4 +29,21 @@ interface ItmoLockService {
         @Path("id") idRoom: Long,
         @Header("authorization") userToken: String
     ): Single<RoomAccessKey>
+
+    @GET("/v1/users")
+    fun getUsers(@Header("authorization") token: String): Single<Users>
+
+    @POST("/v1/locks/{id}/add_user")
+    fun addUser(
+        @Path("id") idUser: Long,
+        @Body id: IdRoomBody,
+        @Header("authorization") token: String
+    ): Completable
+
+    @POST("/v1/locks/{id}/remove_user")
+    fun removeUser(
+        @Path("id") idUser: Long,
+        @Body id: IdRoomBody,
+        @Header("authorization") token: String
+    ): Completable
 }

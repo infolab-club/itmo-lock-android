@@ -14,6 +14,7 @@ val appModule = module {
     single<AuthRepository> { AuthRepositoryImpl() }
     single<InfoRoomRepository> { InfoRoomRepositoryImpl() }
     single<LockRepository> { LockRepositoryImpl() }
+    single<MembersRepository> { MembersRepositoryImpl() }
 
     viewModel { LockViewModel(get(AccountShared::class.java), get(LockRepository::class.java)) }
     viewModel { RoomsViewModel(get(RoomsRepository::class.java), get(AccountShared::class.java)) }
@@ -23,5 +24,5 @@ val appModule = module {
             get(AccountShared::class.java)
         )
     }
-    viewModel { MembersViewModel() }
+    viewModel { MembersViewModel(get()) }
 }

@@ -83,7 +83,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/framePictureProgress" />
 
             <Button
-                android:id="@+id/buttonOpen"
+                android:id="@+id/button_unlock"
                 style="@style/Button"
                 android:layout_width="@dimen/room_image_size"
                 android:layout_height="wrap_content"
