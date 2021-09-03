@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class IdRoomBody(
+class IdUserBody(
     @SerialName("id")
-    val idRoom: Long
+    val idUser: Long
 )

@@ -35,15 +35,15 @@ interface ItmoLockService {
 
     @POST("/v1/locks/{id}/add_user")
     fun addUser(
-        @Path("id") idUser: Long,
-        @Body id: IdRoomBody,
+        @Path("id") idRoom: Long,
+        @Body idUser: IdUserBody,
         @Header("authorization") token: String
     ): Completable
 
     @POST("/v1/locks/{id}/remove_user")
     fun removeUser(
-        @Path("id") idUser: Long,
-        @Body id: IdRoomBody,
+        @Path("id") idRoom: Long,
+        @Body idUser: IdUserBody,
         @Header("authorization") token: String
     ): Completable
 }

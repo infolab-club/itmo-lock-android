@@ -1,6 +1,6 @@
 package club.infolab.itmo_lock.data.repository
 
-import club.infolab.itmo_lock.data.entity.IdRoomBody
+import club.infolab.itmo_lock.data.entity.IdUserBody
 import club.infolab.itmo_lock.data.entity.Users
 import club.infolab.itmo_lock.data.network.ItmoLockService
 import io.reactivex.rxjava3.core.Completable
@@ -16,10 +16,10 @@ class MembersRepositoryImpl : MembersRepository {
     }
 
     override fun addUser(idUser: Long, idRoom: Long, token: String): Completable {
-        return itmoLockService.addUser(idUser, IdRoomBody(idRoom = idRoom), token)
+        return itmoLockService.addUser(idRoom, IdUserBody(idUser = idUser), token)
     }
 
     override fun removeUser(idUser: Long, idRoom: Long, token: String): Completable {
-        return itmoLockService.addUser(idUser, IdRoomBody(idRoom = idRoom), token)
+        return itmoLockService.removeUser(idRoom, IdUserBody(idUser = idUser), token)
     }
 }
