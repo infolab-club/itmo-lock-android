@@ -103,6 +103,7 @@ class LockFragment : Fragment() {
             buttonUnlock.setOnClickListener {
                 ensureBluetoothIsEnabled()
                 lockViewModel.unlock()
+
             }
         }
         initStatusObserve()

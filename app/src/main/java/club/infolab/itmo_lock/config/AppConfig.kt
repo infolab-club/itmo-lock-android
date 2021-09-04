@@ -15,6 +15,7 @@ class AppConfig {
         const val BASE_URL = "https://itmolock.herokuapp.com/"
 
         const val LOCK_MAC = "F6:F9:30:4B:BC:D6"
+
     }
 
 }

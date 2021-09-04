@@ -1,6 +1,5 @@
 package club.infolab.itmo_lock.presentation.ui.lock
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -46,23 +45,59 @@ class LockViewModel(
 
     fun unlock() {
         lockedStatus.postValue(LockStatus.WAITING)
+//        lockRepository.getRoomToken(room!!.id, KeyObj.token)
+//            .flatMapCompletable {
+//                DoorLock.unlock(
+//                    client = default,
+//                    tokenLock = it.roomKey,
+//                    onSuccess = {
+//                        lockedStatus.postValue(LockStatus.UNLOCKED)
+//                    },
+//                    onError = {
+//                        Log.e("LOCK_VM", it.errorMsg)
+//                        lockedStatus.postValue(LockStatus.ERROR)
+//                    })
+//            }
+//            .observeOn(Schedulers.io())
+//            .subscribeOn(AndroidSchedulers.mainThread())
+//            .subscribeBy(
+//                onComplete = {  },
+//                onError = { lockedStatus.postValue(LockStatus.ERROR) }
+//            )
+        /* Doesn't work in another thread (with RxJava3) */
         lockRepository.getRoomToken(room!!.id, KeyObj.token)
-            .flatMapCompletable {
+            .doAfterSuccess { it ->
                 DoorLock.unlock(
                     tokenLock = it.roomKey,
                     onSuccess = {
                         lockedStatus.postValue(LockStatus.UNLOCKED)
                     },
                     onError = {
-                        Log.e("LOCK_VM", it.errorMsg)
                         lockedStatus.postValue(LockStatus.ERROR)
-                    })
+                    }
+                )
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.io())
             .subscribeBy(
-                onError = { Log.e(TAG, it.message.toString()) }
+                onError = {
+                    lockedStatus.postValue(LockStatus.ERROR)
+                }
             )
+//        TTLockClient.getDefault().controlLock(
+//            ControlAction.UNLOCK,
+//            AppConfig.LOCK_DATA,
+//            AppConfig.LOCK_MAC,
+//            object : ControlLockCallback {
+//                override fun onFail(error: LockError) {
+//                    lockedStatus.postValue(LockStatus.ERROR)
+//                }
+//
+//                override fun onControlLockSuccess(p0: ControlLockResult?) {
+//                    lockedStatus.postValue(LockStatus.UNLOCKED)
+//
+//                }
+//            })
     }
 
     fun setRoomData(room: Room) {
