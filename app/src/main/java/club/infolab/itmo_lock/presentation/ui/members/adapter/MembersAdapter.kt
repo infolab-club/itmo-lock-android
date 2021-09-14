@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.databinding.ItemMemberBinding
 import club.infolab.itmo_lock.presentation.ui.rooms.adapter.Member
-import club.infolab.itmo_lock.presentation.ui.rooms.adapter.MembersDiffUtils
 
 class MembersAdapter(private val onActivateCallback: (member: Member) -> Unit) :
     RecyclerView.Adapter<MembersAdapter.MembersViewHolder>() {

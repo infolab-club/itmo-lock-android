@@ -68,6 +68,7 @@ class LockViewModel(
         lockRepository.getRoomToken(room!!.id, KeyObj.token)
             .doAfterSuccess { it ->
                 DoorLock.unlock(
+                    mac = it.mac,
                     tokenLock = it.roomKey,
                     onSuccess = {
                         lockedStatus.postValue(LockStatus.UNLOCKED)

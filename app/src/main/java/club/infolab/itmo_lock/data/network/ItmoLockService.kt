@@ -24,7 +24,7 @@ interface ItmoLockService {
         @Header("authorization") userToken: String
     ): Single<String>
 
-    @GET("/v1/locks/{id}/token")
+    @GET("/v1/locks/{id}")
     fun getRoomAccess(
         @Path("id") idRoom: Long,
         @Header("authorization") userToken: String

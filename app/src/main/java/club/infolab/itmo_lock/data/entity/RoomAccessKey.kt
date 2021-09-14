@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RoomAccessKey(
+    @SerialName("mac")
+    val mac: String,
     @SerialName("token")
     val roomKey: String
 )

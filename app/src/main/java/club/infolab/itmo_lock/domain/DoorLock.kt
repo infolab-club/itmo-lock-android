@@ -1,6 +1,5 @@
 package club.infolab.itmo_lock.domain
 
-import club.infolab.itmo_lock.config.AppConfig
 import com.ttlock.bl.sdk.api.TTLockClient
 import com.ttlock.bl.sdk.callback.ControlLockCallback
 import com.ttlock.bl.sdk.constant.ControlAction
@@ -11,6 +10,7 @@ import io.reactivex.rxjava3.core.Completable
 object DoorLock {
 
     fun unlock(
+        mac: String,
         tokenLock: String,
         onSuccess: () -> Unit,
         onError: (LockError) -> Unit
@@ -18,8 +18,8 @@ object DoorLock {
         Completable.fromCallable {
             TTLockClient.getDefault().controlLock(
                 ControlAction.UNLOCK,
-                AppConfig.LOCK_DATA,
-                AppConfig.LOCK_MAC,
+                tokenLock,
+                mac,
                 object : ControlLockCallback {
                     override fun onFail(error: LockError) {
                         onError(error)
