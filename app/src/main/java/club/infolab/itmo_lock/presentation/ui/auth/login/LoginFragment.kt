@@ -11,7 +11,10 @@ import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.databinding.FragmentLoginBinding
 import club.infolab.itmo_lock.presentation.ui.auth.AuthViewModel
 import club.infolab.itmo_lock.presentation.ui.auth.LoadStatus
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 class LoginFragment : Fragment() {
 
@@ -52,9 +55,7 @@ class LoginFragment : Fragment() {
                 binding.loadingBar.visibility = View.VISIBLE
             }
             is LoadStatus.Error -> {
-                binding.loadingBar.visibility = View.GONE
-                binding.passwordField.error = status.error.toString()
-                binding.emailField.error = status.error.toString()
+                viewError(status)
             }
             is LoadStatus.Success -> {
                 navigateToMain()
@@ -62,6 +63,18 @@ class LoginFragment : Fragment() {
             is LoadStatus.InputWaiting -> {
                 binding.loadingBar.visibility = View.GONE
             }
+        }
+    }
+
+    private fun viewError(status: LoadStatus.Error) {
+        if (status.error is UnknownHostException || status.error is ConnectException) {
+            Snackbar.make(binding.root, getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
+                .show()
+        } else {
+            binding.loadingBar.visibility = View.GONE
+            binding.passwordInputLayout.isPasswordVisibilityToggleEnabled = false
+            binding.passwordField.error = getString(R.string.login_error)
+            binding.emailField.error = getString(R.string.login_error)
         }
     }
 

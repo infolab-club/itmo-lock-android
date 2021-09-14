@@ -13,4 +13,6 @@
     <string name="name">Имя</string>
     <string name="surname">Фамилия</string>
     <string name="locked">Замок закрыт</string>
+    <string name="login_error">Неверные e-mail или пароль</string>
+    <string name="connection_error">Проверьте подключение к интернету</string>
 </resources>
