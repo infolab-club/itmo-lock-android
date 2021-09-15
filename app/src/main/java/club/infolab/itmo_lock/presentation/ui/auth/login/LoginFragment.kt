@@ -61,9 +61,14 @@ class LoginFragment : Fragment() {
                 navigateToMain()
             }
             is LoadStatus.InputWaiting -> {
-                binding.loadingBar.visibility = View.GONE
+                viewInputWaiting()
             }
         }
+    }
+
+    private fun viewInputWaiting() {
+        binding.regContainer.visibility = View.VISIBLE
+        binding.loadingBar.visibility = View.GONE
     }
 
     private fun viewError(status: LoadStatus.Error) {
