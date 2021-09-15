@@ -15,4 +15,6 @@
     <string name="locked">Замок закрыт</string>
     <string name="login_error">Неверные e-mail или пароль</string>
     <string name="connection_error">Проверьте подключение к интернету</string>
+    <string name="email_reg_error">Возможно, пользователь с этой почтой уже существует</string>
+    <string name="name_surname_reg_error">Проверьте правильность введенных данных</string>
 </resources>

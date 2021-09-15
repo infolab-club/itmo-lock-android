@@ -11,9 +11,13 @@ import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.databinding.FragmentRegistrationBinding
 import club.infolab.itmo_lock.presentation.ui.auth.AuthViewModel
 import club.infolab.itmo_lock.presentation.ui.auth.LoadStatus
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 class RegistrationFragment : Fragment() {
+
     private val binding by viewBinding(FragmentRegistrationBinding::bind)
 
     private val registrationViewModel: AuthViewModel by viewModel()
@@ -43,9 +47,7 @@ class RegistrationFragment : Fragment() {
                 binding.loadingBar.visibility = View.VISIBLE
             }
             is LoadStatus.Error -> {
-                binding.loadingBar.visibility = View.GONE
-                binding.passwordField.error = status.error.toString()
-                binding.emailField.error = status.error.toString()
+                viewError(status.error)
             }
             is LoadStatus.Success -> {
                 findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
@@ -53,11 +55,34 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+    private fun viewError(error: Throwable) {
+        when (error) {
+            is UnknownHostException -> viewConnectionError()
+            is ConnectException -> viewConnectionError()
+            else -> {
+                viewInputError()
+            }
+        }
+    }
+
+    private fun viewInputError() {
+        with(binding) {
+            loadingBar.visibility = View.GONE
+            emailField.error = getString(R.string.email_reg_error)
+            nameField.error = getString(R.string.name_surname_reg_error)
+            surnameField.error = getString(R.string.name_surname_reg_error)
+        }
+    }
+
+    private fun viewConnectionError() {
+        Snackbar.make(binding.root, getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
+            .show()
+    }
+
     private fun initButtons() {
         binding.loginTextButton.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
         }
-
         binding.regButton.setOnClickListener { register() }
     }
 
@@ -69,5 +94,4 @@ class RegistrationFragment : Fragment() {
             binding.passwordField.text?.toList() ?: arrayListOf()
         )
     }
-
 }
