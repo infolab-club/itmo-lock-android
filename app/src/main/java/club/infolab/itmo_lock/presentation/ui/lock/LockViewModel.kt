@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import club.infolab.itmo_lock.data.entity.KeyObj
 import club.infolab.itmo_lock.data.entity.Room
+import club.infolab.itmo_lock.data.entity.RoomAccessKey
 import club.infolab.itmo_lock.data.entity.UserInfo
 import club.infolab.itmo_lock.data.repository.LockRepository
 import club.infolab.itmo_lock.domain.DoorLock
@@ -45,42 +46,13 @@ class LockViewModel(
 
     fun unlock() {
         lockedStatus.postValue(LockStatus.WAITING)
-//        lockRepository.getRoomToken(room!!.id, KeyObj.token)
-//            .flatMapCompletable {
-//                DoorLock.unlock(
-//                    client = default,
-//                    tokenLock = it.roomKey,
-//                    onSuccess = {
-//                        lockedStatus.postValue(LockStatus.UNLOCKED)
-//                    },
-//                    onError = {
-//                        Log.e("LOCK_VM", it.errorMsg)
-//                        lockedStatus.postValue(LockStatus.ERROR)
-//                    })
-//            }
-//            .observeOn(Schedulers.io())
-//            .subscribeOn(AndroidSchedulers.mainThread())
-//            .subscribeBy(
-//                onComplete = {  },
-//                onError = { lockedStatus.postValue(LockStatus.ERROR) }
-//            )
+
         /* Doesn't work in another thread (with RxJava3) */
         lockRepository.getRoomToken(room!!.id, KeyObj.token)
-            .doAfterSuccess { it ->
-                DoorLock.unlock(
-                    mac = it.mac,
-                    tokenLock = it.roomKey,
-                    onSuccess = {
-                        lockedStatus.postValue(LockStatus.UNLOCKED)
-                    },
-                    onError = {
-                        lockedStatus.postValue(LockStatus.ERROR)
-                    }
-                )
-            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribeBy(
+                onSuccess = ::unlockDoor,
                 onError = {
                     lockedStatus.postValue(LockStatus.ERROR)
                 }
@@ -99,6 +71,19 @@ class LockViewModel(
 //
 //                }
 //            })
+    }
+
+    private fun unlockDoor(key: RoomAccessKey) {
+        DoorLock.unlock(
+            mac = key.mac,
+            tokenLock = key.roomKey,
+            onSuccess = {
+                lockedStatus.postValue(LockStatus.UNLOCKED)
+            },
+            onError = {
+                lockedStatus.postValue(LockStatus.ERROR)
+            }
+        )
     }
 
     fun setRoomData(room: Room) {
