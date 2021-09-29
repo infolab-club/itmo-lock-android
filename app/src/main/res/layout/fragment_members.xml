@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/rooms"
+        app:title="@string/members_title"
         app:titleCentered="true" />
 
     <androidx.recyclerview.widget.RecyclerView
