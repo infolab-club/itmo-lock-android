@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import club.infolab.itmo_lock.R
 import club.infolab.itmo_lock.databinding.FragmentRegistrationBinding
+import club.infolab.itmo_lock.domain.isWrongInputName
+import club.infolab.itmo_lock.domain.isWrongInputPassword
 import club.infolab.itmo_lock.presentation.ui.auth.AuthViewModel
 import club.infolab.itmo_lock.presentation.ui.auth.LoadStatus
 import com.google.android.material.snackbar.Snackbar
@@ -65,10 +67,30 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+    private fun validateNameText(field: String): Boolean {
+        return field == ""
+    }
+
     private fun viewInputError() {
         with(binding) {
             loadingBar.visibility = View.GONE
             emailInputLayout.error = getString(R.string.email_reg_error)
+            nameInputLayout.error = if (nameField.text.toString().isWrongInputName()) {
+                getString(R.string.name_surname_reg_error)
+            } else {
+                null
+            }
+            surnameInputLayout.error = if (surnameField.text.toString().isWrongInputName()) {
+                getString(R.string.name_surname_reg_error)
+            } else {
+                null
+            }
+
+            passwordInputLayout.error = if (passwordField.text.toString().isWrongInputPassword()) {
+                getString(R.string.incorrect_password)
+            } else {
+                null
+            }
         }
     }
 
@@ -93,3 +115,4 @@ class RegistrationFragment : Fragment() {
         )
     }
 }
+

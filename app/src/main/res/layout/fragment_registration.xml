@@ -59,6 +59,7 @@
                 android:id="@+id/emailField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="@string/text_digits_settings"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
+                android:digits="@string/text_digits_settings"
                 android:maxLength="50" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
-                android:maxLength="20" />
+                android:maxLength="50" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

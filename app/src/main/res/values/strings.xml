@@ -16,6 +16,8 @@
     <string name="login_error">Неверные e-mail или пароль</string>
     <string name="connection_error">Проверьте подключение к интернету</string>
     <string name="email_reg_error">Пользователь с этой почтой уже существует, либо она некорректна</string>
-    <string name="name_surname_reg_error">Проверьте правильность введенных данных</string>
+    <string name="name_surname_reg_error">Поле не должно быть пустым</string>
     <string name="login_password_incorrect">Проверьте правильность введенных данных!</string>
+    <string name="text_digits_settings">QWERTYUIOPASDFGHJKLZXCVBNMqwertzuiopasdfghjklyxcvbnmЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁёйцукенгшщзхъфывапролджэячсмитьбю-</string>
+    <string name="incorrect_password">Пароль должен содержать хотя бы 8 символов</string>
 </resources>
