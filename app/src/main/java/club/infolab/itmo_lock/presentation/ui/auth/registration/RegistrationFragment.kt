@@ -68,9 +68,7 @@ class RegistrationFragment : Fragment() {
     private fun viewInputError() {
         with(binding) {
             loadingBar.visibility = View.GONE
-            emailField.error = getString(R.string.email_reg_error)
-            nameField.error = getString(R.string.name_surname_reg_error)
-            surnameField.error = getString(R.string.name_surname_reg_error)
+            emailInputLayout.error = getString(R.string.email_reg_error)
         }
     }
 

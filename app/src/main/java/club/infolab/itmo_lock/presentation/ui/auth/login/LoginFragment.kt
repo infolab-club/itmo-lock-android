@@ -77,9 +77,12 @@ class LoginFragment : Fragment() {
                 .show()
         } else {
             binding.loadingBar.visibility = View.GONE
-            binding.passwordInputLayout.isPasswordVisibilityToggleEnabled = false
-            binding.passwordField.error = getString(R.string.login_error)
-            binding.emailField.error = getString(R.string.login_error)
+            Snackbar.make(
+                binding.root,
+                getString(R.string.login_password_incorrect),
+                Snackbar.LENGTH_SHORT
+            )
+                .show()
         }
     }
 
